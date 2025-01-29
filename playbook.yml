@@ -1,0 +1,21 @@
+- name: Deploy Web Application
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copy index.html to web server
+      copy:
+        src: /home/ansible/deployment/index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
