@@ -10,13 +10,13 @@ pipeline {
 
         stage('Transfer Files to Ansible') {
             steps {
-                sh 'scp index.html playbook.yml ansible_user@172.31.34.144:/home/ansible/deployment/'
+                sh 'scp index.html playbook.yml ansible@172.31.34.144:/home/ansible/deployment/'
             }
         }
 
         stage('Run Ansible Playbook') {
             steps {
-                sh 'ssh ansible_user@172.31.34.144 "ansible-playbook /home/ansible/deployment/playbook.yml"'
+                sh 'ssh ansible@172.31.34.144 "ansible-playbook /home/ansible/deployment/playbook.yml"'
             }
         }
     }
